@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Site Romântico</title>
+    <style>
+        body {
+            background-color: pink;
+            background-image: url("coracao.png");
+            background-repeat: repeat;
+        }
+
+        .container {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+        
+        #no {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 24px;
+            cursor: not-allowed;
+        }
+
+        #yes {
+            display: block;
+            font-size: 24px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Aceita namorar comigo?</h1>
+        <div id="no" onclick="moveNo()">Não</div>
+        <div id="yes" onclick="showMessage()">Sim</div>
+    </div>
+
+    <script>
+        var messageDisplayed = false;
+
+        function moveNo() {
+            var noButton = document.getElementById('no');
+            var container = document.querySelector('.container');
+            
+            var maxX = container.offsetWidth - noButton.offsetWidth;
+            var maxY = container.offsetHeight - noButton.offsetHeight;
+            
+            var randomX = Math.floor(Math.random() * maxX);
+            var randomY = Math.floor(Math.random() * maxY);
+            
+            noButton.style.left = randomX + 'px';
+            noButton.style.top = randomY + 'px';
+        }
+
+        function showMessage() {
+            if (!messageDisplayed) {
+                var yesButton = document.getElementById('yes');
+                var message = document.createElement('h2');
+                message.textContent = 'Te espero em casa 66';
+                document.querySelector('.container').appendChild(message);
+                yesButton.style.display = 'none';
+                messageDisplayed = true;
+            }
+        }
+
+        document.getElementById('no').addEventListener('click', moveNo);
+        document.getElementById('yes').addEventListener('click', showMessage);
+    </script>
+</body>
+</html>
